@@ -1,0 +1,9 @@
+sum(rate(container_cpu_usage_seconds_total{namespace="kube-system"}[5m]))
+sum(rate(container_memory_usage_bytes{namespace="default"}[5m]))
+
+
+
+# Node Exporter
+100 * (1 - avg(rate(node_cpu_seconds_total{mode="idle"}[5m])) by (instance))
+sum by (instance) (rate(node_cpu_seconds_total{mode!="idle"}[5m]))
+
